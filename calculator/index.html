@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: segoe ui;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            width: 40px;
+            height: 40px;
+        }
+
+        #division span::after {
+            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0.85em' height='0.85em' viewBox='0 0 36 36'%3E%3Cpath fill='white' d='M34 18a3 3 0 0 1-3 3H5a3 3 0 1 1 0-6h26a3 3 0 0 1 3 3'/%3E%3Ccircle cx='18' cy='7' r='4' fill='white'/%3E%3Ccircle cx='18' cy='29' r='4' fill='white'/%3E%3C/svg%3E");
+            display: block;
+        }
+
+        #multi span::after {
+            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m18 6l-6 6m0 0l-6 6m6-6l6 6m-6-6L6 6' color='white'/%3E%3C/svg%3E");
+            display: block;
+        }
+
+        .symbols-color {
+            background: #ff9f0a;
+            color: #ffffff;
+        }
+        
+        .nums-color {
+            background: #333333;
+            color: #ffffff;
+        }
+        
+        .ac-color {
+            background: #a5a5a5;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                <div class="card bg-dark">
+                    <div class="calc card-body">
+                        <input type="text" id="inp1" class="form-control mb-3 text-end" disabled>
+                        <div class="calc-nums row">
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-primary" id="AC">C</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-primary" id="power">**</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-primary" id="percent">%</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-warning text-white d-flex justify-content-center align-items-center" id="division"><span></span></button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-secondary">7</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-secondary">8</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-secondary">9</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-warning text-white d-flex justify-content-center align-items-center" id="multi"><span></span></button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-secondary">4</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-secondary">5</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-secondary">6</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-warning text-white" id="min">-</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-secondary">1</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-secondary">2</button>    
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-secondary">3</button>   
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-warning text-white" id="sum">+</button>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <button class="rounded-pill btn btn-secondary col-12">0</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-secondary">.</button>
+                            </div>
+                            <div class="col-3 mb-2">
+                                <button class="rounded-circle btn btn-warning text-white" id="assign">=</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let inp1 = document.getElementById("inp1");
+
+        function getPreventDefaul(e) {
+            e.preventDefault();
+        }
+
+        inp1.addEventListener("keydown", getPreventDefaul);
+
+        let calNums = document.querySelectorAll(".calc-nums button");
+        let ac = document.getElementById("AC");
+        let sum = document.getElementById("sum");
+        let min = document.getElementById("min");
+        let multi = document.getElementById("multi");
+        let division = document.getElementById("division");
+        let assign = document.getElementById("assign");
+        let power = document.getElementById("power");
+        let percent = document.getElementById("percent");
+        for (let i = 0; i < calNums.length; i++) {
+            calNums[i].onclick = function () {
+                inp1.value += this.innerHTML;
+            }
+        }
+        ac.onclick = function () {
+            inp1.value = "";
+        }
+        let symbol = "";
+        let result = 0;
+        sum.onclick = function () {
+            result = Number(inp1.value);
+            inp1.value = "";
+            symbol = "+";
+        }
+        min.onclick = function () {
+            result = Number(inp1.value);
+            inp1.value = "";
+            symbol = "-";
+        }
+        multi.onclick = function () {
+            result = Number(inp1.value);
+            inp1.value = "";
+            symbol = "*";
+        }
+        division.onclick = function () {
+            result = Number(inp1.value);
+            inp1.value = "";
+            symbol = "/";
+        }
+        percent.onclick = function () {
+            result = Number(inp1.value);
+            inp1.value = "";
+            symbol = "%";
+        }
+        power.onclick = function () {
+            result = Number(inp1.value);
+            inp1.value = "";
+            symbol = "**";
+        }
+        assign.onclick = function () {
+            if (symbol == "+") {
+                inp1.value = result + Number(inp1.value);
+            }
+            if (symbol == "-") {
+                inp1.value = result - Number(inp1.value);
+            }
+            if (symbol == "*") {
+                inp1.value = result * Number(inp1.value);
+            }
+            if (symbol == "/") {
+                inp1.value = result / Number(inp1.value);
+            }
+            if (symbol == "%") {
+                inp1.value = result % Number(inp1.value);
+            }
+            if (symbol == "**") {
+                inp1.value = result ** Number(inp1.value);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
