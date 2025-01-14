@@ -1,0 +1,35 @@
+@font-face {
+    font-family: light;
+    src: url(assets/font/Yekan-Bakh-FaNum-04-Regular.woff);
+}
+
+@font-face {
+    font-family: bold;
+    src: url(assets/font/Yekan-Bakh-FaNum-06-Bold.woff);
+}
+
+
+.tophead {
+    background-image: url(assets/image/169_orig.jpg);
+    background-size: cover;
+    width: 99vw;
+    height: 170px;
+}
+
+@media screen and (max-width: 576px) {
+    .tophead {
+        height: 100px;
+    }
+}
+
+.pdate {
+    font-family: light;
+}
+
+.pday {
+    font-family: bold;
+}
+
+
+
+
